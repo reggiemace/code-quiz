@@ -15,17 +15,34 @@
 <body>
     <div class="container">
         <h1>Coding Quiz Challenge</h1>
-        <p id="question">Try to answer the following code-related questions within the time limit. Keep in mind that the
-            incorrect
-            answers
-            will penalize your score time by ten seconds.</p>
-        <p id="answers">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dolore dolorum commodi voluptas
-            ex quas
-            velit. Voluptatibus illum accusamus dolorum ullam minima, dolores tenetur alias. Aut itaque autem atque
-            fugit ex nobis debitis officia impedit eos corrupti harum deserunt consequuntur labore voluptate, in fuga
-            reprehenderit molestiae. Molestiae quidem maxime magnam tempora ipsum distinctio corporis non, praesentium,
-            vero deleniti ratione impedit.</p>
+        <!-- Div for questions -->
+        <div id="question">
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that
+                the
+                incorrect
+                answers
+                will penalize your score time by ten seconds.</p>
+        </div>
+        <!-- Div for answers -->
+        <div id="answers">
+            <p></p>
+        </div>
         <button id="start-button">Start Quiz</button>
+        <div id="results">
+            <form action="">
+                <h1>All Done!!</h1>
+                <label for="score">Your Score is: </label><br><br>
+                <label for="intials">Enter Your Intials</label>
+                <input type="text">
+                <input type="submit">
+            </form>
+        </div>
+        <div id="highScores">
+            <h1>High Scores</h1>
+            <textarea name="show-highScore" id="show-highScore" cols="30" rows="1"></textarea><br><br>
+            <button id="restart">Go Back</button>
+            <button id="reset">Clear High Scores</button>
+        </div>
     </div>
     <script src="./assets/js/script.js"></script>
 
