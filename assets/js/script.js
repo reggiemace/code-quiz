@@ -11,19 +11,28 @@ var questions = document.querySelector("#questions");
 var answers = document.querySelector("#answers");
 var startButton = document.querySelector("#start-button");
 
-// Set a timer to default setting when page loads
-function startTimer(){
+var secondsLeft = 60;
 
+// Set a timer to start quiz button is clicked
+function startTimer() {
+  var timerInterval = setInterval(function () {
+    secondsLeft--;
+    timer.textContent = "Time: :" + secondsLeft;
+
+    if (secondsLeft === 0) {
+      //Stops execution of action at set interval
+      clearInterval(timerInterval);
+      //Calls function to create and append image
+      //sendMessage();
+    }
+  }, 1000);
 }
+
 //Generate random questions for the user to answer
-function generateQuestions {
-
-}
+function startQuiz() {}
 //End the game when time is 0 or all questions are answered
-function gameOver {
-
-}
+function gameOver() {}
 //Save the results to local storage
-function saveResults {
+function saveResults() {}
 
-}
+startTimer();
