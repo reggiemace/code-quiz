@@ -11,6 +11,11 @@
     <div id=viewHighScore>View High Scores:</div>
     <div id="timer"></div>
 </header>
+<!-- <script>
+    window.onload = function () {
+        document.getElementById('results').style.display = "none";
+    }
+</script> -->
 
 <body>
     <div class="container">
@@ -22,29 +27,29 @@
                 incorrect
                 answers
                 will penalize your score time by ten seconds.</p>
+            </di>
+            <!-- Div for answers -->
+            <div id="answers">
+                <p></p>
+            </div>
+            <button id="start-button">Start Quiz</button>
+            <div id="results">
+                <form action="">
+                    <h1>All Done!!</h1>
+                    <label for="score">Your Score is: <span id="score">0</span> </label><br><br>
+                    <label for="intials">Enter Your Initials</label>
+                    <input type="text">
+                    <input type="submit">
+                </form>
+            </div>
+            <div id="highScores">
+                <h1>High Scores</h1>
+                <textarea name="show-highScore" id="show-highScore" cols="30" rows="1"></textarea><br><br>
+                <button id="restart">Go Back</button>
+                <button id="reset">Clear High Scores</button>
+            </div>
         </div>
-        <!-- Div for answers -->
-        <div id="answers">
-            <p></p>
-        </div>
-        <button id="start-button">Start Quiz</button>
-        <div id="results">
-            <form action="">
-                <h1>All Done!!</h1>
-                <label for="score">Your Score is: </label><br><br>
-                <label for="intials">Enter Your Intials</label>
-                <input type="text">
-                <input type="submit">
-            </form>
-        </div>
-        <div id="highScores">
-            <h1>High Scores</h1>
-            <textarea name="show-highScore" id="show-highScore" cols="30" rows="1"></textarea><br><br>
-            <button id="restart">Go Back</button>
-            <button id="reset">Clear High Scores</button>
-        </div>
-    </div>
-    <script src="./assets/js/script.js"></script>
+        <script src="./assets/js/script.js"></script>
 
 </body>
 
