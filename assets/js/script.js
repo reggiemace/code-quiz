@@ -7,6 +7,7 @@ When all questions have been answered or timer equals 0, the game is over.
 When the game is over user saves initials and score */
 
 var timer = document.querySelector("#timer");
+var instructions = document.querySelector("#instructions");
 var questions = document.querySelector("#questions");
 var answers = document.querySelector("#answers");
 var startButton = document.querySelector("#start-button");
@@ -15,15 +16,17 @@ var score = document.querySelector("#score");
 var highScore = document.querySelector("#highScores");
 var restartButton = document.querySelector("#restart");
 var resetButton = document.querySelector("#reset");
+var initials = document.querySelector("#initials");
 var secondsLeft = 60;
+
 var yourScore = localStorage.getItem("yourScore");
 
 score.textContent = yourScore;
 
 // Hide results and high score section of page until page is loaded
 window.onload = function () {
-  document.getElementById("results").style.display = "none";
-  document.getElementById("highScores").style.display = "none";
+  results.style.display = "none";
+  highScore.style.display = "none";
 };
 
 const quizQuestions = [
@@ -76,51 +79,13 @@ function startTimer() {
     timer.textContent = "Time: :" + secondsLeft;
 
     if (secondsLeft === 0) {
+      gameOver();
       //Stops execution of action at set interval
       clearInterval(timerInterval);
       //Calls function to create and append image
       //sendMessage();
     }
-  }, 1000);
-}
-/* function hideStartButton() {
-  var hidden = false;
-  hidden = !hidden;
-  if (hidden) {
-    startButton.style.visibility = "hidden";
-  } else {
-    startButton.style.visibility = "visible";
-  }
-} */
-/* function showStartButton() {
-  var visible = true;
-  visible = !visible;
-  if (visible) {
-    answers.style.visibility = "visible";
-  } else {
-    answers.style.visibility = "hidden";
-  }
-} */
-/* function displayQuestions() {
-  var visible = true;
-  visible = !visible;
-  if (visible) {
-    answers.style.visibility = "hidden";
-  } else {
-    answers.style.visibility = "visible";
-  }
-} */
-function hideDisplayQuestions() {
-  var visible = false;
-  visible = !visible;
-  if (visible) {
-    answers.style.visibility = "hidden";
-  } else {
-    answers.style.visibility = "visible";
-  }
-}
-function hideResults() {
-  results.style.display = "block";
+  }, 100);
 }
 function restartQuiz() {
   restartButton.addEventListener("click", function () {
@@ -129,8 +94,8 @@ function restartQuiz() {
 }
 
 resetButton.addEventListener("click", function () {
-  localStorage.removeItem("Your Score", yourScore);
-  score.textContent = " ";
+  localStorage.removeItem(initials, yourScore);
+  //score.textContent = " ";
 });
 
 //Generate random questions for the user to answer
@@ -138,6 +103,7 @@ function startQuiz() {
   startButton.addEventListener("click", function () {
     startTimer();
     startButton.style.display = "none";
+    instructions.style.display = "none";
     quizBuilder();
     saveResults();
   });
@@ -158,17 +124,29 @@ function quizBuilder() {
     answers.appendChild(newButton);
     answers.appendChild(nextLine);
   }
+  //gameOver();
 }
 
 //End the game when time is 0 or all questions are answered
-function gameOver() {}
+function gameOver() {
+  answers.style.display = "none";
+  results.style.display = "block";
+}
 
 //Save the results to local storage
 function saveResults() {
   if (yourScore < 1000) {
     yourScore++;
     score.textContent = yourScore;
-    localStorage.setItem("Your Score", yourScore);
+    //localStorage.setItem("Your Score", yourScore);
+    document.querySelector("form").onsubmit = function (e) {
+      e.preventDefault();
+      var initials = document.querySelector("#initials").value;
+      localStorage.setItem(initials, yourScore);
+      console.log(localStorage);
+      results.style.display = "none";
+      highScore.style.display = "block";
+    };
   }
 }
 

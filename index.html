@@ -11,18 +11,18 @@
     <div id=viewHighScore>View High Scores:</div>
     <div id="timer"></div>
 </header>
-<!-- <script>
-    window.onload = function () {
-        document.getElementById('results').style.display = "none";
-    }
-</script> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 
 <body>
     <div class="container">
         <h1>Coding Quiz Challenge</h1>
         <!-- Div for questions -->
         <div id="question">
-            <p>Try to answer the following code-related questions within the time limit. Keep in mind that
+            <p id="instructions">Try to answer the following code-related questions within the time limit. Keep in mind
+                that
                 the
                 incorrect
                 answers
@@ -32,13 +32,17 @@
             <div id="answers">
                 <p></p>
             </div>
+            <div id="questionResult">
+                <h2>" "</h2>
+            </div>
             <button id="start-button">Start Quiz</button>
-            <div id="results">
-                <form action="">
+            <div id="results" class="show">
+
+                <form method="POST">
                     <h1>All Done!!</h1>
                     <label for="score">Your Score is: <span id="score">0</span> </label><br><br>
-                    <label for="intials">Enter Your Initials</label>
-                    <input type="text">
+                    <label for="intial">Enter Your Initials</label>
+                    <input id="initials" type="text">
                     <input type="submit">
                 </form>
             </div>
