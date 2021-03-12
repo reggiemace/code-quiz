@@ -14,10 +14,13 @@ var startButton = document.querySelector("#start-button");
 var results = document.querySelector("#results");
 var score = document.querySelector("#score");
 var highScore = document.querySelector("#highScores");
-var restartButton = document.querySelector("#restart");
-var resetButton = document.querySelector("#reset");
+var goBackButton = document.querySelector("#goBack");
+var clearButton = document.querySelector("#clear");
 var initials = document.querySelector("#initials");
+var questionResult = document.querySelector("#questionResult");
 var secondsLeft = 60;
+var letterChoices = ["a", "b", "c", "d"];
+var currentQuestion = 0;
 
 var yourScore = localStorage.getItem("yourScore");
 
@@ -27,47 +30,30 @@ score.textContent = yourScore;
 window.onload = function () {
   results.style.display = "none";
   highScore.style.display = "none";
+  questionResult.style.display = "none";
 };
 
 const quizQuestions = [
   {
     question: "What is 1 + 0",
-    answers: {
-      a: "1",
-      b: "2",
-      c: "3",
-      d: "4",
-    },
-    correctAnswer: "a",
+    answers: ["1", "2", "3", "4"],
+
+    correctAnswer: "1",
   },
   {
     question: "What is 1 + 1",
-    answers: {
-      a: "1",
-      b: "2",
-      c: "3",
-      d: "4",
-    },
-    correctAnswer: "b",
+    answers: ["1", "2", "3", "4"],
+    correctAnswer: "2",
   },
   {
     question: "What is 1 + 2",
-    answers: {
-      a: "1",
-      b: "2",
-      c: "3",
-      d: "4",
-    },
-    correctAnswer: "c",
+    answers: ["1", "2", "3", "4"],
+
+    correctAnswer: "3",
   },
   {
     question: "What is 1 + 3",
-    answers: {
-      a: "1",
-      b: "2",
-      c: "3",
-      d: "4",
-    },
+    answers: ["1", "2", "3", "4"],
     correctAnswer: "4",
   },
 ];
@@ -76,7 +62,7 @@ const quizQuestions = [
 function startTimer() {
   var timerInterval = setInterval(function () {
     secondsLeft--;
-    timer.textContent = "Time: :" + secondsLeft;
+    timer.textContent = "Time : " + secondsLeft;
 
     if (secondsLeft === 0) {
       gameOver();
@@ -85,15 +71,15 @@ function startTimer() {
       //Calls function to create and append image
       //sendMessage();
     }
-  }, 100);
+  }, 200);
 }
 function restartQuiz() {
-  restartButton.addEventListener("click", function () {
+  goBackButton.addEventListener("click", function () {
     console.log("button Clicked");
   });
 }
 
-resetButton.addEventListener("click", function () {
+clearButton.addEventListener("click", function () {
   localStorage.removeItem(initials, yourScore);
   //score.textContent = " ";
 });
@@ -112,20 +98,40 @@ function startQuiz() {
 //Build Questions for the Quiz
 function quizBuilder() {
   var newButton;
-  for (var i = 0; i < quizQuestions.length; i++) {
-    var answerChoices = answers[i];
+  var para = document.createElement("p");
+  para.textContent = quizQuestions[currentQuestion].question;
+  answers.appendChild(para);
+
+  for (var i = 0; i < quizQuestions[currentQuestion].answers.length; i++) {
+    var answerChoices = quizQuestions[currentQuestion].answers[i];
     newButton = document.createElement("button");
+
     var nextLine = document.createElement("br");
-    newButton.style.width = "100%";
-    newButton.style.height = "30px";
-    newButton.className = i + 1;
-    newButton.textContent = answerChoices + " " + i;
-    newButton.setAttribute(answerChoices, i);
+    newButton.className = "newButton";
+    newButton.textContent = answerChoices;
+    newButton.addEventListener("click", function (event) {
+      if (
+        quizQuestions[currentQuestion].correctAnswer ===
+        event.target.textContent
+      ) {
+        yourScore = yourScore + 20;
+        questionResult.style.display = "visible";
+        questionResult.textContent = "Correct";
+      } else {
+        secondsLeft -= 10;
+        questionResult.textContent = "Incorrect";
+        questionResult.style.display = "visible";
+      }
+      currentQuestion++;
+      answers.innerHTML = "";
+      quizBuilder();
+    });
+
     answers.appendChild(newButton);
     answers.appendChild(nextLine);
   }
-  //gameOver();
 }
+//gameOver();
 
 //End the game when time is 0 or all questions are answered
 function gameOver() {
@@ -135,8 +141,8 @@ function gameOver() {
 
 //Save the results to local storage
 function saveResults() {
-  if (yourScore < 1000) {
-    yourScore++;
+  if (yourScore < 100) {
+    yourScore += yourScore;
     score.textContent = yourScore;
     //localStorage.setItem("Your Score", yourScore);
     document.querySelector("form").onsubmit = function (e) {
@@ -153,4 +159,4 @@ function saveResults() {
 }
 
 startQuiz();
-//restartQuiz();
+restartQuiz();

@@ -30,7 +30,6 @@
             </di>
             <!-- Div for answers -->
             <div id="answers">
-                <p></p>
             </div>
             <div id="questionResult">
                 <h2>" "</h2>
@@ -40,7 +39,7 @@
 
                 <form method="POST">
                     <h1>All Done!!</h1>
-                    <label for="score">Your Score is: <span id="score">0</span> </label><br><br>
+                    <label for="score">Your Score is: <span id="score"></span> </label><br><br>
                     <label for="intial">Enter Your Initials</label>
                     <input id="initials" type="text">
                     <input type="submit">
@@ -49,8 +48,8 @@
             <div id="highScores">
                 <h1>High Scores</h1>
                 <textarea name="show-highScore" id="show-highScore" cols="30" rows="1"></textarea><br><br>
-                <button id="restart">Go Back</button>
-                <button id="reset">Clear High Scores</button>
+                <button id="goBack">Go Back</button>
+                <button id="clear">Clear High Scores</button>
             </div>
         </div>
         <script src="./assets/js/script.js"></script>
