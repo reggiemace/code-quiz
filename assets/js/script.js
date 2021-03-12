@@ -141,8 +141,10 @@ function saveResults() {
     //localStorage.setItem("Your Score", yourScore);
     document.querySelector("form").onsubmit = function (e) {
       e.preventDefault();
-      var initials = document.querySelector("#initials").value;
-      localStorage.setItem(initials, yourScore);
+      var initialsLocal = document.querySelector("#initials").value;
+      //initials = initials.getItem.textContent;
+      initials = initialsLocal;
+      localStorage.setItem(initialsLocal, yourScore);
       console.log(localStorage);
       results.style.display = "none";
       highScore.style.display = "block";
