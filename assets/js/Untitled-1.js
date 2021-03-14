@@ -42,7 +42,7 @@ const quizQuestions = [
     ],
 
     correctAnswer:
-      "1.  The markup language that we use to structure and give meaning to our web content.",
+      "1.The markup language that we use to structure and give meaning to our web content.",
   },
   {
     question: "Which of the following is not a backend programming language",
@@ -54,7 +54,7 @@ const quizQuestions = [
       "A local variable's scope can be used in statements from other functions",
     answers: ["1.  True", "2.  False"],
 
-    correctAnswer: "2.  False",
+    correctAnswer: "3",
   },
   {
     question: "What is 1 + 3",
@@ -87,8 +87,6 @@ function restartQuiz() {
 
 clearButton.addEventListener("click", function () {
   localStorage.removeItem(initials, yourScore);
-  showHighScore.textContent = " ";
-
   //score.textContent = " ";
 
   //if score a is > b
@@ -126,12 +124,12 @@ function quizBuilder() {
         event.target.textContent
       ) {
         yourScore = yourScore + 20;
-        questionResult.style.display = "block";
+        questionResult.style.display = "visible";
         questionResult.textContent = "Correct";
       } else {
         secondsLeft -= 10;
         questionResult.textContent = "Incorrect";
-        questionResult.style.display = "none";
+        questionResult.style.display = "visible";
       }
       currentQuestion++;
       answers.innerHTML = "";
@@ -164,7 +162,6 @@ function saveResults() {
       localStorage.setItem(initialsLocal, yourScore);
       console.log(localStorage);
       results.style.display = "none";
-      showHighScore.textContent = " " + initialsLocal + " " + yourScore;
       highScore.style.display = "block";
       var thisScore = localStorage.getItem(initialsLocal, yourScore);
 
