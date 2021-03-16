@@ -1,7 +1,7 @@
 /* 1. set element to show high Scores
    2. go button to restart quiz
    3. keep new high score
-   4. clear highscore*/
+   4. clear high score*/
 
 //
 
@@ -19,7 +19,6 @@ var initials = document.querySelector("#initials");
 var questionResult = document.querySelector("#questionResult");
 var showHighScore = document.querySelector("#show-highScore");
 var secondsLeft = 60;
-var letterChoices = ["a", "b", "c", "d"];
 var currentQuestion = 0;
 var yourScore = localStorage.getItem("yourScore");
 score.textContent = yourScore;
@@ -57,8 +56,8 @@ const quizQuestions = [
     correctAnswer: "2.  False",
   },
   {
-    question: "What is 1 + 3",
-    answers: ["1", "2", "3", "4"],
+    question: "CSS is a language used to style HTML.",
+    answers: ["1.  True", "2.  False"],
     correctAnswer: "4",
   },
 ];
@@ -88,7 +87,6 @@ function restartQuiz() {
 clearButton.addEventListener("click", function () {
   localStorage.removeItem(initials, yourScore);
   showHighScore.textContent = " ";
-  //if score a is > b
 });
 
 //Generate random questions for the user to answer
@@ -110,46 +108,40 @@ function quizBuilder() {
   para.textContent = quizQuestions[currentQuestion].question;
   answers.appendChild(para);
 
+  // Loop through answer choices and add to page as buttons
   for (var i = 0; i < quizQuestions[currentQuestion].answers.length; i++) {
     var answerChoices = quizQuestions[currentQuestion].answers[i];
     newButton = document.createElement("button");
-
     var nextLine = document.createElement("br");
     newButton.className = "newButton";
     newButton.textContent = answerChoices;
+    // add event listener and add functionality to correct incorrect responses
     newButton.addEventListener("click", function (event) {
       if (
         quizQuestions[currentQuestion].correctAnswer ===
         event.target.textContent
       ) {
         yourScore = yourScore + 25;
-        //questionResult.style.display = "block";
-        // questionResult.textContent = "Correct";
         alert("Correct");
       } else {
         secondsLeft -= 10;
         alert("Incorrect");
-
-        //questionResult.textContent = "Incorrect";
-        //questionResult.style.display = "none";
       }
       currentQuestion++;
       answers.innerHTML = "";
       quizBuilder();
     });
-
     answers.appendChild(newButton);
     answers.appendChild(nextLine);
   }
 }
-//gameOver();
-
 //End the game when time is 0 or all questions are answered
 function gameOver() {
   if (secondsLeft < 0) {
     timer.textContent = "Time : " + "Sorry your out of Time!!!!!";
   }
   answers.style.display = "none";
+  score.textContent = yourScore;
   results.style.display = "block";
 }
 
@@ -162,21 +154,15 @@ function saveResults() {
     document.querySelector("form").onsubmit = function (e) {
       e.preventDefault();
       var initialsLocal = document.querySelector("#initials").value;
-
-      //initials = initials.getItem.textContent;
       initials = initialsLocal;
       localStorage.setItem(initialsLocal, yourScore);
       console.log(localStorage);
       results.style.display = "none";
-      newListItem = document.createElement("li");
       showHighScore.textContent = " " + initialsLocal + " " + yourScore;
       highScore.style.display = "block";
-      //var thisScore = localStorage.getItem(initialsLocal, yourScore);
-
       score.textContent = yourScore;
     };
   }
 }
-
 startQuiz();
 restartQuiz();
